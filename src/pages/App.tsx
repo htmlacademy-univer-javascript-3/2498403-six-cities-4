@@ -1,11 +1,11 @@
 import Main from './main';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../const';
-import Login from './login';
-import Offer from './offer';
-import NotFound from './not-found';
-import PrivateRoute from './private-route';
-import Favorites from './favorites';
+import Login from '../pages/login';
+import Offer from '../pages/offer';
+import NotFound from '../pages/not-found';
+import PrivateRoute from '../pages/private-route';
+import Favorites from '../pages/favorites';
 
 type AppProps = {
   rentalOffersCount: number;
