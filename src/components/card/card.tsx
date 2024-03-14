@@ -17,7 +17,7 @@ function Card({ title, type, price, rating, isPremium, previewImage, isFavorite 
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="src/components/Card#card.tsx">
+        <a href="src/components/card/card#card.tsx">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place previewImage"/>
         </a>
       </div>
@@ -43,7 +43,7 @@ function Card({ title, type, price, rating, isPremium, previewImage, isFavorite 
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="src/components/Card#card.tsx">{title}</a>
+          <a href="src/components/card/card#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
