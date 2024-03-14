@@ -1,11 +1,11 @@
-import Main from '../../pages/Main';
+import Main from './Main.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
-import NotFound from '../../pages/not-found';
-import PrivateRoute from '../../pages/private-route';
-import Offer from '../../pages/offer';
-import Login from '../../pages/login';
-import Favorites from '../../pages/favorites';
+import {AppRoute, AuthorizationStatus} from '../const.ts';
+import NotFound from './NotFound.tsx';
+import PrivateRoute from './PrivateRoute.tsx';
+import Offer from './Offer.tsx';
+import Login from './Login.tsx';
+import Favorites from './Favorites.tsx';
 
 type AppProps = {
   rentalOffersCount: number;
