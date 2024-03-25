@@ -1,79 +1,17 @@
-import Card from '../components/card/card';
+import {MainProps} from '../types/types';
+import Card from '../components/card/Card';
+import {Link} from 'react-router-dom';
+import {CitiesList} from '../components/citiesList/CitiesList';
+import {Header} from '../components/header/Header';
 
-type MainProps = {
-  rentalOffersCount: number;
-}
+function Main({ rentalOffersCount , offers, cities}: MainProps): JSX.Element {
 
-function Main({ rentalOffersCount }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <CitiesList cities={cities} />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -95,51 +33,11 @@ function Main({ rentalOffersCount }: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Card
-                  title="Beautiful & luxurious apartment at great location"
-                  type="Apartment"
-                  price={120}
-                  rating={4}
-                  isPremium
-                  previewImage="img/apartment-01.jpg"
-                  isFavorite={false}
-                />
-                <Card
-                  title="Wood and stone place"
-                  type="Room"
-                  price={80}
-                  rating={4}
-                  isPremium={false}
-                  previewImage="img/room.jpg"
-                  isFavorite
-                />
-                <Card
-                  title="Canal View Prinsengracht"
-                  type="Apartment"
-                  price={132}
-                  rating={4}
-                  isPremium={false}
-                  previewImage="img/apartment-02.jpg"
-                  isFavorite={false}
-                />
-                <Card
-                  title="Nice, cozy, warm big bed apartment"
-                  type="Apartment"
-                  price={180}
-                  rating={5}
-                  isPremium
-                  previewImage="img/apartment-03.jpg"
-                  isFavorite={false}
-                />
-                <Card
-                  title="Wood and stone place"
-                  type="Room"
-                  price={80}
-                  rating={4}
-                  isPremium={false}
-                  previewImage="img/room.jpg"
-                  isFavorite
-                />
+                {offers.map((offer) => (
+                  <Link to={`/offer/${offer.id}`} key={offer.id}>
+                    <Card {...offer} />
+                  </Link>
+                ))}
               </div>
             </section>
             <div className="cities__right-section">
