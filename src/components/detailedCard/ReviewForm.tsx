@@ -1,11 +1,11 @@
 import React, {FormEvent, useState} from 'react';
 
 export function ReviewForm() {
-  const [rating, setRating] = useState<string>('');
+  const [rating, setRating] = useState<number>(NaN);
   const [review, setReview] = useState<string>('');
 
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRating(event.target.value);
+    setRating(parseInt(event.target.value, 10));
   };
 
   const handleReviewChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -30,6 +30,7 @@ export function ReviewForm() {
               value={star}
               id={`${star}-stars`}
               type="radio"
+              checked={star === rating}
               onChange={handleRatingChange}
             />
             <label htmlFor={`${star}-stars`} className="reviews__rating-label form__rating-label" title="perfect">

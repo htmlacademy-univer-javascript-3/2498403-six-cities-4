@@ -4,7 +4,7 @@ export type AppProps = {
   rentalOffersCount: number;
   offers: Offers;
   cities: LocationList;
-  detailedOffers: DetailedOffers;
+  detailedOffers: DetailedOffer[];
 }
 
 export type MainProps = {
@@ -70,16 +70,21 @@ export type DetailedOffer = {
   rating: number;
   description: string;
   bedrooms: number;
-  goods: [string];
+  goods: string[];
   host: {
     name: string;
     avatarUrl: string;
     isPro: boolean;
   };
-  images: [string];
+  images: string[];
   maxAdults: number;
 }
 
 export type DetailedOffers = DetailedOffer[];
 
 export type LocationList = string[];
+
+export type OfferCardProps = {
+  offer: Offer;
+  onHover: (id: string | null) => void;
+}

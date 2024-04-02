@@ -25,9 +25,8 @@ function App({ rentalOffersCount, offers, cities, detailedOffers }: AppProps):JS
           element={
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
-              offers={offers}
             >
-              <Favorites/>
+              <Favorites offers={offers}/>
             </PrivateRoute>
           }
         />

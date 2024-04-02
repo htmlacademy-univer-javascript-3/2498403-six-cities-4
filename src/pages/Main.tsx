@@ -1,10 +1,12 @@
 import {MainProps} from '../types/types';
 import Card from '../components/card/Card';
-import {Link} from 'react-router-dom';
 import {CitiesList} from '../components/citiesList/CitiesList';
 import {Header} from '../components/header/Header';
+import {useState} from 'react';
 
 function Main({ rentalOffersCount , offers, cities}: MainProps): JSX.Element {
+
+  const [, setOfferId] = useState<string | null>(null);
 
   return (
     <div className="page page--gray page--main">
@@ -34,9 +36,7 @@ function Main({ rentalOffersCount , offers, cities}: MainProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {offers.map((offer) => (
-                  <Link to={`/offer/${offer.id}`} key={offer.id}>
-                    <Card {...offer} />
-                  </Link>
+                  <Card key={offer.id} offer={offer} onHover={setOfferId} />
                 ))}
               </div>
             </section>

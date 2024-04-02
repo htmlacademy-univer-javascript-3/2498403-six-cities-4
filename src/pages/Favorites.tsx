@@ -2,8 +2,11 @@ import {Offer, Offers, OffersByCity} from '../types/types';
 import Card from '../components/card/Card';
 import {Header} from '../components/header/Header';
 import {Footer} from '../components/footer/Footer';
+import {useState} from 'react';
 
 function Favorites({ offers }: { offers: Offers }): JSX.Element {
+
+  const [, setOfferId] = useState<string | null>(null);
 
   const offersByCity = offers.reduce((acc: OffersByCity, offer) => {
     const { city } = offer;
@@ -37,7 +40,7 @@ function Favorites({ offers }: { offers: Offers }): JSX.Element {
                       {offersByCity[cityName]
                         .filter((offer) => offer.isFavorite)
                         .map((offer) => (
-                          <Card key={offer.id} {...offer} />
+                          <Card key={offer.id} offer={offer} onHover={setOfferId}/>
                         ))}
                     </div>
                   </li>
