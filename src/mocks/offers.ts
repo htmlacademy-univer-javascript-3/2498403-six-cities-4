@@ -1,4 +1,5 @@
 import {Offers} from '../types/types';
+import {points} from './points';
 
 export const offers: Offers = [
   {
@@ -16,8 +17,8 @@ export const offers: Offers = [
       }
     },
     'location': {
-      'latitude': 48.868610000000004,
-      'longitude': 2.342499,
+      'latitude': points[0].lat,
+      'longitude': points[0].lng,
       'zoom': 16
     },
     'isFavorite': false,
@@ -39,8 +40,8 @@ export const offers: Offers = [
       }
     },
     'location': {
-      'latitude': 48.858610000000006,
-      'longitude': 2.330499,
+      'latitude': points[1].lat,
+      'longitude': points[1].lng,
       'zoom': 16
     },
     'isFavorite': false,
@@ -62,8 +63,8 @@ export const offers: Offers = [
       }
     },
     'location': {
-      'latitude': 48.834610000000005,
-      'longitude': 2.335499,
+      'latitude': points[2].lat,
+      'longitude': points[2].lng,
       'zoom': 16
     },
     'isFavorite': false,
@@ -85,8 +86,8 @@ export const offers: Offers = [
       }
     },
     'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
+      'latitude': points[3].lat,
+      'longitude': points[3].lng,
       'zoom': 16
     },
     'isFavorite': false,
