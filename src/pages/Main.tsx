@@ -4,15 +4,26 @@ import { CitiesList } from '../components/citiesList/CitiesList';
 import { Header } from '../components/header/Header';
 import {MainProps} from '../types/types';
 import Map from '../components/map/Map';
+import cn from 'classnames';
 
 function Main({ rentalOffersCount, offers, cities }: MainProps): JSX.Element {
-  const [, setOfferId] = useState<string | null>(null);
+  const [id, setOfferId] = useState<string | null>(null);
   const hasOffers = offers && offers.length > 0;
+
+  const mainClassName = cn('page__main', 'page__main--index', {
+    'page__main--index-empty': !hasOffers,
+  });
+
+  const location = {
+    latitude: cities[0].lat,
+    longitude: cities[0].lng,
+    zoom: cities[0].zoom
+  };
 
   return (
     <div className="page page--gray page--main">
       <Header />
-      <main className={`page__main page__main--index ${!hasOffers ? 'page__main--index-empty' : ''}`}>
+      <main className={mainClassName}>
         {hasOffers ? (
           <>
             <CitiesList cities={cities} />
@@ -24,7 +35,7 @@ function Main({ rentalOffersCount, offers, cities }: MainProps): JSX.Element {
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
                     <span className="places__sorting-type" tabIndex={0}>
-                    Popular
+                      Popular
                       <svg className="places__sorting-arrow" width="7" height="4">
                         <use xlinkHref="#icon-arrow-select"></use>
                       </svg>
@@ -61,7 +72,7 @@ function Main({ rentalOffersCount, offers, cities }: MainProps): JSX.Element {
                     </p>
                   </div>
                 </section>
-                <Map points={cities} city={cities[0]} />
+                <Map offers={offers} specialOfferId={id} location={location} type="cities" />
               </div>
             </div>
           </>

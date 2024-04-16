@@ -25,17 +25,9 @@ export type Offer = {
   price: number;
   city: {
     name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
+    location: Location;
   };
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
+  location: Location;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -55,16 +47,9 @@ export type DetailedOffer = {
   price: number;
   city: {
     name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };};
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
+    location: Location;
   };
+  location: Location;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -104,13 +89,22 @@ export type City = {
 
 export type Cities = City[];
 
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
 export type MapProps = {
-  city: City;
-  points: Points;
-  selectedPoint: Point | undefined;
+  location: Location;
+  offers: Offer[];
+  specialOfferId: string | null;
+  type: string;
 };
 
 export type ListProps = {
   points: Points;
   onListItemHover: (listItemName: string) => void;
 };
+
+export type Nullable<T> = T | null;

@@ -8,10 +8,10 @@ export function CitiesList({ cities }: { cities: Cities }): JSX.Element {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cities.map((city) => (
-              <li key={city.title} className="locations__item">
+            {cities.map(({ title }) => (
+              <li key={title} className="locations__item">
                 <a className="locations__item-link tabs__item" href="src/components/citiesList/CitiesList#">
-                  <span>{city.title}</span>
+                  <span>{title}</span>
                 </a>
               </li>
             ))}
@@ -21,4 +21,3 @@ export function CitiesList({ cities }: { cities: Cities }): JSX.Element {
     </React.Fragment>
   );
 }
-
