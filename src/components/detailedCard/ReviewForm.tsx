@@ -14,9 +14,7 @@ export function ReviewForm() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log({ rating, review });
-  };
+  }
 
   return (
     <form className="reviews__form form" onSubmit={handleSubmit}>

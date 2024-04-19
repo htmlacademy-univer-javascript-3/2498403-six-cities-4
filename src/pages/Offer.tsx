@@ -3,6 +3,7 @@ import {DetailedCard} from '../components/detailedCard/DetailedCard';
 import { useParams } from 'react-router-dom';
 import {Header} from '../components/header/Header';
 import {NearPlaces} from '../components/nearPlaces/NearPlaces';
+import {nearPlaces} from '../mocks/nearPlaces';
 
 function Offer({detailedOffers}: {detailedOffers: DetailedOffers}): JSX.Element {
 
@@ -15,7 +16,7 @@ function Offer({detailedOffers}: {detailedOffers: DetailedOffers}): JSX.Element 
 
       <main className="page__main page__main--offer">
         <DetailedCard detailedOffer={review}></DetailedCard>
-        <NearPlaces />
+        <NearPlaces nearPlaces={nearPlaces} />
       </main>
     </div>
   );

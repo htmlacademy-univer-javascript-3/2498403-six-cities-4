@@ -67,9 +67,11 @@ export type DetailedOffer = {
 
 export type DetailedOffers = DetailedOffer[];
 
-export type OfferCardProps = {
+export type CardProps = {
   offer: Offer;
-  onHover: (id: string | null) => void;
+  onHover?: (id: string | null) => void;
+  imageWrapperClass?: string;
+  articleClass?: string;
 }
 
 export type Point = {
@@ -102,9 +104,13 @@ export type MapProps = {
   type: string;
 };
 
-export type ListProps = {
-  points: Points;
-  onListItemHover: (listItemName: string) => void;
-};
-
 export type Nullable<T> = T | null;
+
+export type ReviewsItemProp = {
+  name: string;
+  avatar: string;
+  review: string;
+  dateTime: string;
+  rating: number;
+}
+
