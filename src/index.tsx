@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './pages/App';
 import {offers} from './mocks/offers';
 import {cities} from './mocks/cities';
-import {detaiedOffers} from './mocks/detaiedOffers';
+import {detailedOffers} from './mocks/detailedOffers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +15,6 @@ const Settings = {
 
 root.render(
   <React.StrictMode>
-    <App rentalOffersCount={Settings.RentalOffersCount} offers={offers} cities={cities} detailedOffers={detaiedOffers}/>
+    <App rentalOffersCount={Settings.RentalOffersCount} offers={offers} cities={cities} detailedOffers={detailedOffers}/>
   </React.StrictMode>
 );

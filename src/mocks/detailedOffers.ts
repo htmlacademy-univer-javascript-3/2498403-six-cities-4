@@ -1,4 +1,4 @@
-export const detaiedOffers = [
+export const detailedOffers = [
   {
     'id': '855b1827-2e5f-4da3-a835-7a4b7886608b',
     'title': 'House in countryside',
