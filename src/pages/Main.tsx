@@ -5,8 +5,14 @@ import { Header } from '../components/header/Header';
 import {MainProps} from '../types/types';
 import Map from '../components/map/Map';
 import cn from 'classnames';
+import {RootState} from '../store';
+import {useSelector} from 'react-redux';
 
 function Main({ rentalOffersCount, offers, cities }: MainProps): JSX.Element {
+  const { currentCity, offers } = useSelector((state: RootState) => ({
+    currentCity: state.rentals.currentCity,
+    offers: state.rentals.offers
+  }));
   const [id, setOfferId] = useState<string | null>(null);
   const hasOffers = offers && offers.length > 0;
 
@@ -15,9 +21,9 @@ function Main({ rentalOffersCount, offers, cities }: MainProps): JSX.Element {
   });
 
   const location = {
-    latitude: cities[0].lat,
-    longitude: cities[0].lng,
-    zoom: cities[0].zoom
+    latitude: currentCity.lat,
+    longitude: currentCity[0].lng,
+    zoom: currentCity[0].zoom
   };
 
   return (
