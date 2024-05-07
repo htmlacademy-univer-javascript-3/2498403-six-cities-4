@@ -114,3 +114,17 @@ export type ReviewsItemProp = {
   rating: number;
 }
 
+export type Action = {
+  type: 'SET_CITY' | 'UPDATE_OFFERS';
+  payload: any;
+};
+
+export type State = {
+  currentCity: City;
+  offers: Offers;
+};
+
+export type CityName = {
+  name: string;
+}
+
