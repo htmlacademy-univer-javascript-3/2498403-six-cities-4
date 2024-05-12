@@ -124,7 +124,10 @@ export type State = {
   offers: Offers;
 };
 
-export type CityName = {
-  name: string;
-}
+export type SortingType = 'Popular' | 'Price: low to high' | 'Price: high to low' | 'Top rated first';
+
+export type SortingProps = {
+  sortingType: string;
+  onChangeSorting: (type: string) => void;
+};
 

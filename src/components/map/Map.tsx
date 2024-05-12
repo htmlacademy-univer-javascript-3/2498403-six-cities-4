@@ -1,8 +1,8 @@
-import {useRef, useEffect} from 'react';
-import {Icon, Marker, layerGroup} from 'leaflet';
+import { useRef, useEffect } from 'react';
+import { Icon, Marker, layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
-import {MapProps} from '../../types/types';
+import { MapProps } from '../../types/types';
 
 const defaultCustomIcon = new Icon({
   iconUrl: 'img/pin.svg',
@@ -16,35 +16,32 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map(props: MapProps): JSX.Element {
-  const {location, offers, specialOfferId} = props;
-
+function Map({ location, offers, specialOfferId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
 
   useEffect(() => {
     if (map) {
       map.setView([location.latitude, location.longitude], location.zoom);
-
       const markerLayer = layerGroup().addTo(map);
-      offers.forEach((offer) => {
-        const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude
-        });
+      markerLayer.clearLayers();
 
-        marker.setIcon(
-          offer.id === specialOfferId ? currentCustomIcon : defaultCustomIcon
-        ).addTo(markerLayer);
+      offers.forEach((offer) => {
+        const isSpecial = offer.id === specialOfferId;
+        const markerIcon = isSpecial ? currentCustomIcon : defaultCustomIcon;
+        new Marker([offer.location.latitude, offer.location.longitude], {
+          icon: markerIcon
+        }).addTo(markerLayer);
       });
 
       return () => {
+        markerLayer.clearLayers();
         map.removeLayer(markerLayer);
       };
     }
   }, [map, location, offers, specialOfferId]);
 
-  return <div style={{height: '500px'}} ref={mapRef}></div>;
+  return <div style={{ height: '500px', width: '100%' }} ref={mapRef}></div>;
 }
 
 export default Map;
