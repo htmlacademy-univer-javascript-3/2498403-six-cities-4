@@ -1,41 +1,35 @@
-import {useEffect, useState, MutableRefObject, useRef} from 'react';
-import {Map, TileLayer} from 'leaflet';
-import {Nullable, Location} from '../types/types';
+import { useEffect, useState, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { Location } from '../types/types';
 
-function useMap(
-  mapRef: MutableRefObject<HTMLElement | null>,
-  location: Location,
-): Map | null {
-  const [map, setMap] = useState<Nullable<Map>>(null);
-  const isRenderedRef = useRef<boolean>(false);
+const useMap = (mapRef: React.MutableRefObject<HTMLElement | null>, location: Location): L.Map | null => {
+  const [map, setMap] = useState<L.Map | null>(null);
+  const isInitialized = useRef<boolean>(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
-      const instance = new Map(mapRef.current, {
-        center: {
-          lat: location.latitude,
-          lng: location.longitude
-        },
-        zoom: 10
+    if (mapRef.current && !isInitialized.current) {
+      // Initialize the map only if it hasn't been initialized yet
+      const newMap = L.map(mapRef.current, {
+        center: [location.latitude, location.longitude],
+        zoom: location.zoom
       });
 
-      const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; ' +
-            '<a href="https://carto.com/attributions">CARTO</a>'
-        }
-      );
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(newMap);
 
-      instance.addLayer(layer);
-
-      setMap(instance);
-      isRenderedRef.current = true;
+      setMap(newMap);
+      isInitialized.current = true; // Mark as initialized
     }
-  }, [mapRef, location]);
+
+    // Update the map view when location changes
+    if (map && (map.getZoom() !== location.zoom || !map.getCenter().equals([location.latitude, location.longitude]))) {
+      map.setView([location.latitude, location.longitude], location.zoom);
+    }
+  }, [mapRef, map, location]);
 
   return map;
-}
+};
 
 export default useMap;
