@@ -18,7 +18,7 @@ export type PrivateRouteProps = {
   children: JSX.Element;
 }
 
-export type Offer = {
+export type OfferProps = {
   id: string;
   title: string;
   type: string;
@@ -34,7 +34,7 @@ export type Offer = {
   previewImage: string;
 }
 
-export type Offers = Offer[];
+export type Offers = OfferProps[];
 
 export type OffersByCity = {
   [cityName: string]: Offers;
@@ -68,7 +68,7 @@ export type DetailedOffer = {
 export type DetailedOffers = DetailedOffer[];
 
 export type CardProps = {
-  offer: Offer;
+  offer: OfferProps;
   onHover?: (id: string | null) => void;
   imageWrapperClass?: string;
   articleClass?: string;
@@ -99,19 +99,23 @@ export type Location = {
 
 export type MapProps = {
   location: Location;
-  offers: Offer[];
+  offers: OfferProps[];
   specialOfferId: string | null;
   type: string;
 };
 
-export type Nullable<T> = T | null;
+export type User = {
+  avatarUrl: string;
+  isPro: boolean;
+  name: string;
+}
 
 export type ReviewsItemProp = {
-  name: string;
-  avatar: string;
-  review: string;
-  dateTime: string;
+  comment: string;
+  date: string;
+  id: string;
   rating: number;
+  user: User;
 }
 
 export type Action = {
@@ -122,6 +126,8 @@ export type Action = {
 export type State = {
   currentCity: City;
   offers: Offers;
+  isLoading: boolean;
+  error: Error | null;
 };
 
 export type SortingType = 'Popular' | 'Price: low to high' | 'Price: high to low' | 'Top rated first';
@@ -130,4 +136,12 @@ export type SortingProps = {
   sortingType: string;
   onChangeSorting: (type: string) => void;
 };
+
+export type ReviewsItemProps = {
+  name: string;
+  avatar: string;
+  rating: number;
+  review: string;
+  dateTime: string;
+}
 

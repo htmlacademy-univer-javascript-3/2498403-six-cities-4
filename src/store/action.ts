@@ -1,26 +1,14 @@
-import {Offer, City} from '../types/types';
+import {City, OfferProps} from '../types/types';
+import {createAction} from '@reduxjs/toolkit';
 
 export const SET_CITY = 'SET_CITY';
 export const UPDATE_OFFERS = 'UPDATE_OFFERS';
+export const FETCH_OFFERS_START = 'FETCH_OFFERS_START';
+export const FETCH_OFFERS_SUCCESS = 'FETCH_OFFERS_SUCCESS';
+export const FETCH_OFFERS_FAIL = 'FETCH_OFFERS_FAIL';
 
-export type SetCityAction = {
-  type: typeof SET_CITY;
-  payload: City;
-};
-
-export type UpdateOffersAction = {
-  type: typeof UPDATE_OFFERS;
-  payload: Offer[];
-};
-
-export type Action = SetCityAction | UpdateOffersAction;
-
-export const setCity = (city: City): SetCityAction => ({
-  type: SET_CITY,
-  payload: city
-});
-
-export const updateOffers = (offers: Offer[]): UpdateOffersAction => ({
-  type: UPDATE_OFFERS,
-  payload: offers
-});
+export const setCity = createAction<City>(SET_CITY);
+export const updateOffers = createAction<OfferProps[]>(UPDATE_OFFERS);
+export const fetchOffersStart = createAction(FETCH_OFFERS_START);
+export const fetchOffersSuccess = createAction<OfferProps[]>(FETCH_OFFERS_SUCCESS);
+export const fetchOffersFail = createAction<string>(FETCH_OFFERS_FAIL);

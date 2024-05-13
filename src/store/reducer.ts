@@ -1,10 +1,12 @@
 import { Action, State } from '../types/types';
 import {cities} from '../mocks/cities';
-import {offers} from '../mocks/offers';
+import {FETCH_OFFERS_FAIL, FETCH_OFFERS_START, FETCH_OFFERS_SUCCESS} from './action';
 
 const initialState: State = {
-  offers: offers,
-  currentCity: cities[0]
+  offers: [],
+  currentCity: cities[0],
+  isLoading: false,
+  error: null
 };
 
 export const rentalReducer = (state: State = initialState, action: Action): State => {
@@ -18,6 +20,24 @@ export const rentalReducer = (state: State = initialState, action: Action): Stat
       return {
         ...state,
         offers: action.payload
+      };
+    case FETCH_OFFERS_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case FETCH_OFFERS_SUCCESS:
+      return {
+        ...state,
+        offers: action.payload,
+        isLoading: false
+      };
+    case FETCH_OFFERS_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
       };
     default:
       return state;
