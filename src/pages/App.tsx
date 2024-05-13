@@ -8,13 +8,13 @@ import Favorites from './Favorites.tsx';
 import {AppProps} from '../types/types';
 import PrivateRoute from './PrivateRoute';
 
-function App({ offers, cities, detailedOffers }: AppProps):JSX.Element {
+function App({ offers, cities}: AppProps):JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<Main offers={offers} cities={cities}/>}
+          element={<Main cities={cities}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -32,7 +32,7 @@ function App({ offers, cities, detailedOffers }: AppProps):JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<Offer detailedOffers={detailedOffers}/>}
+          element={<Offer />}
         />
         <Route
           path='*'

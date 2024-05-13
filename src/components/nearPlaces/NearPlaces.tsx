@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../card/Card';
-import { Offer } from '../../types/types';
+import { OfferProps } from '../../types/types';
 
 type NearPlacesProps = {
-  nearPlaces: Offer[];
+  nearPlaces: OfferProps[];
 }
 
 export function NearPlaces({ nearPlaces }: NearPlacesProps) {

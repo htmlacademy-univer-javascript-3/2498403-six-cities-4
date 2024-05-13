@@ -1,4 +1,4 @@
-import {Offer, Offers, OffersByCity} from '../types/types';
+import {OfferProps, Offers, OffersByCity} from '../types/types';
 import Card from '../components/card/Card';
 import {Header} from '../components/header/Header';
 import {Footer} from '../components/footer/Footer';
@@ -15,7 +15,7 @@ function Favorites({ offers }: { offers: Offers }): JSX.Element {
     }
     acc[city.name].push(offer);
     return acc;
-  }, {} as { [key: string]: Offer[] });
+  }, {} as { [key: string]: OfferProps[] });
 
 
   return (

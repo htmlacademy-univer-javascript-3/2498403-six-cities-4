@@ -1,16 +1,17 @@
-import {DetailedOffer} from '../../types/types';
+import {DetailedOffer, OfferProps} from '../../types/types';
 import {ReviewsList} from './ReviewsList';
-import {reviews} from '../../mocks/reviews';
-import {offers} from '../../mocks/offers';
 import Map from '../map/Map';
 
-export function DetailedCard({ detailedOffer }: { detailedOffer: DetailedOffer }): JSX.Element {
+export function DetailedCard({ detailedOffer, nearbyOffers }: { detailedOffer: DetailedOffer;
+  nearbyOffers: OfferProps[]; }): JSX.Element {
 
   const location = {
     latitude: detailedOffer.location.latitude,
     longitude: detailedOffer.location.longitude,
     zoom: detailedOffer.location.zoom,
   };
+
+  const allOffers = [detailedOffer, ...nearbyOffers];
 
   return (
     <section className="offer">
@@ -92,10 +93,10 @@ export function DetailedCard({ detailedOffer }: { detailedOffer: DetailedOffer }
               </p>
             </div>
           </div>
-          <ReviewsList reviews={reviews}></ReviewsList>
+          <ReviewsList offerId={detailedOffer.id}></ReviewsList>
         </div>
       </div>
-      <Map offers={offers} location={location} specialOfferId={detailedOffer.id} type="offers"></Map>
+      <Map offers={allOffers} location={location} specialOfferId={detailedOffer.id} type="offers"></Map>
     </section>
   );
 }
