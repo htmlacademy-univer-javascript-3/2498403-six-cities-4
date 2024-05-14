@@ -1,12 +1,16 @@
-import { Action, State } from '../types/types';
+import {Action, AuthorizationStatus, State} from '../types/types';
 import {cities} from '../mocks/cities';
-import {FETCH_OFFERS_FAIL, FETCH_OFFERS_START, FETCH_OFFERS_SUCCESS} from './action';
+import {FETCH_OFFERS_FAIL, FETCH_OFFERS_START, FETCH_OFFERS_SUCCESS, SET_AUTHORIZATION_STATUS} from './action';
 
-const initialState: State = {
+export const initialState: State = {
   offers: [],
   currentCity: cities[0],
   isLoading: false,
-  error: null
+  error: null,
+  authorizationStatus: {
+    status: AuthorizationStatus.Unauthenticated,
+    user: null
+  },
 };
 
 export const rentalReducer = (state: State = initialState, action: Action): State => {
@@ -38,6 +42,11 @@ export const rentalReducer = (state: State = initialState, action: Action): Stat
         ...state,
         isLoading: false,
         error: action.payload
+      };
+    case SET_AUTHORIZATION_STATUS:
+      return {
+        ...state,
+        authorizationStatus: action.payload
       };
     default:
       return state;

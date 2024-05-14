@@ -8,7 +8,8 @@ export const FETCH_OFFERS_SUCCESS = 'FETCH_OFFERS_SUCCESS';
 export const FETCH_OFFERS_FAIL = 'FETCH_OFFERS_FAIL';
 
 export const setCity = createAction<City>(SET_CITY);
-export const updateOffers = createAction<OfferProps[]>(UPDATE_OFFERS);
 export const fetchOffersStart = createAction(FETCH_OFFERS_START);
 export const fetchOffersSuccess = createAction<OfferProps[]>(FETCH_OFFERS_SUCCESS);
 export const fetchOffersFail = createAction<string>(FETCH_OFFERS_FAIL);
+
+export const SET_AUTHORIZATION_STATUS = 'SET_AUTHORIZATION_STATUS';

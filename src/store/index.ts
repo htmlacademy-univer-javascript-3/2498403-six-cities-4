@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {rentalReducer} from './reducer';
+import {initialState, rentalReducer} from './reducer';
 import {api} from '../api/api';
 
 export const store = configureStore({
+  name: 'rentals',
+  initialState,
   reducer: {
     rentals: rentalReducer
   },
