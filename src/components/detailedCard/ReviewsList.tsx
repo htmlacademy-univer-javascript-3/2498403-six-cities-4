@@ -12,7 +12,9 @@ export function ReviewsList({ offerId }: string) {
   useEffect(() => {
     fetchReviewsById(offerId)
       .then((response) => {
-        setReviews(response.data);
+        const sortedReviews = response.data.sort((a, b) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime());
+        setReviews(sortedReviews.slice(0, 10));
       })
       .catch((err) => {
         setError(err);
@@ -34,7 +36,7 @@ export function ReviewsList({ offerId }: string) {
           />
         ))}
       </ul>
-      <ReviewForm />
+      <ReviewForm id={offerId} />
     </section>
   );
 }

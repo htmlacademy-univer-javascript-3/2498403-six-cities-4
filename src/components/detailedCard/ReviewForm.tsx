@@ -1,8 +1,12 @@
 import React, {FormEvent, useState} from 'react';
+import axios from 'axios';
+import {postReviewById} from '../../api/api-actions';
 
-export function ReviewForm() {
+export function ReviewForm({ id }: { id: string }) {
   const [rating, setRating] = useState<number>(NaN);
   const [review, setReview] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRating(parseInt(event.target.value, 10));
@@ -12,9 +16,25 @@ export function ReviewForm() {
     setReview(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-  }
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      await postReviewById(id, review, rating);
+      setRating(NaN);
+      setReview('');
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        setError(err.response.data.error || 'An error occurred');
+      } else {
+        setError('An error occurred');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <form className="reviews__form form" onSubmit={handleSubmit}>
@@ -46,6 +66,9 @@ export function ReviewForm() {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={review}
         onChange={handleReviewChange}
+        minLength={50}
+        maxLength={300}
+        disabled={isSubmitting}
       >
       </textarea>
       <div className="reviews__button-wrapper">
