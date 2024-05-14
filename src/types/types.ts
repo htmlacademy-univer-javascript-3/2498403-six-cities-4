@@ -1,5 +1,3 @@
-import {AuthorizationStatus} from '../const';
-
 export type AppProps = {
   rentalOffersCount: number;
   offers: Offers;
@@ -16,6 +14,12 @@ export type MainProps = {
 export type PrivateRouteProps = {
   authorizationStatus: AuthorizationStatus;
   children: JSX.Element;
+}
+
+export enum AuthorizationStatus {
+  Authenticated = 'AUTHENTICATED',
+  Unauthenticated = 'UNAUTHENTICATED',
+  Pending = 'PENDING'
 }
 
 export type OfferProps = {
@@ -65,8 +69,6 @@ export type DetailedOffer = {
   maxAdults: number;
 }
 
-export type DetailedOffers = DetailedOffer[];
-
 export type CardProps = {
   offer: OfferProps;
   onHover?: (id: string | null) => void;
@@ -79,8 +81,6 @@ export type Point = {
   lat: number;
   lng: number;
 };
-
-export type Points = Point[];
 
 export type City = {
   title: string;
@@ -123,12 +123,6 @@ export type Action = {
   payload: any;
 };
 
-export enum AuthorizationStatus {
-  Authenticated = 'AUTHENTICATED',
-  Unauthenticated = 'UNAUTHENTICATED',
-  Pending = 'PENDING'
-}
-
 export type UserLogin = {
   name: string;
   avatarUrl: string;
@@ -166,5 +160,10 @@ export type ReviewsItemProps = {
   rating: number;
   review: string;
   dateTime: string;
+}
+
+export type Review = {
+  comment: string;
+  rating: number;
 }
 

@@ -6,7 +6,15 @@ import {
   SET_AUTHORIZATION_STATUS
 } from '../store/action';
 import axios, {AxiosResponse} from 'axios';
-import {AuthorizationStatus, DetailedOffer, LoginPayload, OfferProps, ReviewsItemProp, UserLogin} from '../types/types';
+import {
+  AuthorizationStatus,
+  DetailedOffer,
+  LoginPayload,
+  OfferProps,
+  Review,
+  ReviewsItemProp,
+  UserLogin
+} from '../types/types';
 import {api} from './api';
 import {Dispatch} from 'react';
 
@@ -22,11 +30,14 @@ export const fetchOffers = () => async (dispatch, getState, { api }) => {
 
 export const login = ({ email, password }: LoginPayload) => async (dispatch: Dispatch) => {
   try {
-    const response: AxiosResponse<UserLogin> = await api.post('/login', { email, password });
-    const { token, ...userData } = response.data;
-
-    localStorage.setItem('token', token);
-    api.defaults.headers.common['X-Token'] = token;
+    const loginResponse: AxiosResponse<UserLogin> = await api.post('/login', { email, password });
+    const { token: postToken } = loginResponse.data;
+    localStorage.setItem('token', postToken);
+    api.defaults.headers.common['X-Token'] = postToken;
+    const getResponse: AxiosResponse<UserLogin> = await api.get('/login');
+    const { token: getToken, ...userData } = getResponse.data;
+    localStorage.setItem('token', getToken);
+    api.defaults.headers.common['X-Token'] = getToken;
 
     dispatch({
       type: SET_AUTHORIZATION_STATUS,
@@ -93,3 +104,6 @@ export const fetchNearbyOffersById: (id: string) => Promise<AxiosResponse<OfferP
 
 export const fetchReviewsById: (id: string) => Promise<AxiosResponse<ReviewsItemProp[], unknown>> = (id: string) =>
   api.get<ReviewsItemProp[]>(`/comments/${id}`);
+
+export const postReviewById: (id: string, comment: string, rating: number) => Promise<AxiosResponse<Review, unknown>> =
+  (id: string, comment: string, rating: number) => api.post<Review>(`/comments/${id}`, { comment, rating });
