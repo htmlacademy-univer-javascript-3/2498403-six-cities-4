@@ -1,6 +1,6 @@
 import Main from './Main.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../const.ts';
+import {AppRoute} from '../const.ts';
 import NotFound from './NotFound.tsx';
 import Offer from './Offer.tsx';
 import Login from './Login.tsx';
@@ -23,9 +23,7 @@ function App({ offers, cities}: AppProps):JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
+            <PrivateRoute>
               <Favorites offers={offers}/>
             </PrivateRoute>
           }

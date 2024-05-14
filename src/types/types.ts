@@ -123,11 +123,34 @@ export type Action = {
   payload: any;
 };
 
+export enum AuthorizationStatus {
+  Authenticated = 'AUTHENTICATED',
+  Unauthenticated = 'UNAUTHENTICATED',
+  Pending = 'PENDING'
+}
+
+export type UserLogin = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
+};
+
 export type State = {
   currentCity: City;
   offers: Offers;
   isLoading: boolean;
   error: Error | null;
+  authorizationStatus: {
+    status: AuthorizationStatus;
+    user: UserLogin | null;
+  };
+};
+
+export type LoginPayload = {
+  email: string;
+  password: string;
 };
 
 export type SortingType = 'Popular' | 'Price: low to high' | 'Price: high to low' | 'Top rated first';
